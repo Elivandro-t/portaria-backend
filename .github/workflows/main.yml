@@ -44,4 +44,5 @@ jobs:
             docker compose rm -f portaria-app || true
 
             # Subir container com build
-            docker compose up -d --build portaria-app
+            docker compose up -d portaria-app
+
