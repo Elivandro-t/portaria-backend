@@ -17,14 +17,6 @@ jobs:
         with:
           username: ${{ secrets.DOKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: elivandrolopes/portaria:1.0
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
