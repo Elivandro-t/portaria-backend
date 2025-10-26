@@ -1,9 +1,9 @@
-name: Build and Deploy Docker Compose Local
+name: Build and Deploy to local
 
 on:
   push:
     branches:
-      - main  # ou sua branch principal
+      - main
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
         with:
-          context: ./portaria
+          context: .
           push: true
           tags: elivandrolopes/portaria:1.0
 
@@ -29,23 +29,23 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH na máquina local
+      - name: Deploy via SSH no servidor
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets.SH_MAQUINA_LOCAL_IP }}       # IP da sua máquina em casa
-          username: elivandro                    # usuário da máquina
-          key: ${{ secrets.SH_KEY }}     # chave privada sem passphrase
+          host: ${{ secrets.SH_MAQUINA_LOCAL_IP }}
+          username: elivandro
+          key: ${{ secrets.SH_KEY }}
           script: |
-            cd ~/portaria    # caminho do docker-compose.yml
+            cd ~/portaria
 
-            # Verificar se Docker Compose v2 está instalado
+            # Atualizar Docker Compose v2 se necessário
             if ! docker compose version >/dev/null 2>&1; then
               sudo apt-get update
               sudo apt-get install -y docker-compose-plugin
             fi
 
             # Pull da imagem mais recente
-            docker pull elivandrolopes/portaria:1.0
+            docker pull elivandrolopes/portaria:2.0
 
             # Parar e remover container antigo (ignora erro se não existir)
             docker compose stop portaria-app || true
