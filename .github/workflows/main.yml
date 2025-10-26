@@ -45,7 +45,7 @@ jobs:
             fi
 
             # Pull da imagem mais recente
-            docker pull elivandrolopes/portaria:2.0
+            docker pull elivandrolopes/portaria:1.0
 
             # Parar e remover container antigo (ignora erro se não existir)
             docker compose stop portaria-app || true
