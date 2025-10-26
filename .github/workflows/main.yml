@@ -15,15 +15,15 @@ jobs:
       - name: Docker Login
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          tags: elivandrolopes/zapdai-ms:2.0
+          tags: elivandrolopes/portaria:1.0
 
   deploy:
     needs: build
@@ -32,9 +32,9 @@ jobs:
       - name: Deploy via SSH na máquina local
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets.LOCAL_HOST }}       # IP da sua máquina em casa
+          host: ${{ secrets.SH_MAQUINA_LOCAL_IP }}       # IP da sua máquina em casa
           username: elivandro                    # usuário da máquina
-          key: ${{ secrets.LOCAL_SSH_KEY }}     # chave privada sem passphrase
+          key: ${{ secrets.SH_KEY }}     # chave privada sem passphrase
           script: |
             cd ~        # caminho do docker-compose.yml
 
