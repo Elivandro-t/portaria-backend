@@ -21,7 +21,7 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./portaria
           push: true
           tags: elivandrolopes/portaria:1.0
 
