@@ -36,7 +36,7 @@ jobs:
           username: elivandro                    # usuário da máquina
           key: ${{ secrets.SH_KEY }}     # chave privada sem passphrase
           script: |
-            cd ~        # caminho do docker-compose.yml
+            cd ~/portaria    # caminho do docker-compose.yml
 
             # Verificar se Docker Compose v2 está instalado
             if ! docker compose version >/dev/null 2>&1; then
