@@ -25,6 +25,7 @@ public class HistoryEntradaEntity {
     private long registroPortariaId;
     private String nomeCompleto;
     @ManyToOne
+    @JoinColumn(name = "visitante_id", foreignKey = @ForeignKey(name = "fk_history_visitante"))
     private VisitanteEntity visitante;
     private String placaVeiculo;
     private LocalDateTime dataCriacao;
@@ -35,6 +36,7 @@ public class HistoryEntradaEntity {
     @Enumerated(EnumType.STRING)
     private StatusPortaria status;
     @ManyToOne
+    @JoinColumn(name = "criador_id", foreignKey = @ForeignKey(name = "fk_history_criador"))
     private UsuarioEntity criador;
     private Integer filialSolicitado;
     private Boolean ativo;

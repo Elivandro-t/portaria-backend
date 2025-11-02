@@ -23,13 +23,15 @@ public class LogAcaoEntity {
     private String acao;
     private String descricao;
     private LocalDateTime dataHora;
+    private Integer filial;
 
-    public LogAcaoEntity(UsuarioRequestDTO usuario, String acao,String descricao) {
+    public LogAcaoEntity(UsuarioRequestDTO usuario, String acao,String descricao,Integer filial) {
         this.usuarioId = usuario.id();
         this.usuario = usuario.nome();
         this.acao = acao;
         this.descricao = descricao;
         this.dataHora = LocalDateTime.now();
+        this.filial = filial;
 
 }
 }

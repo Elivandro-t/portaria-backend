@@ -1,13 +1,11 @@
 package com.portariacd.portaria.intefaces.controllers;
 
 import com.portariacd.portaria.application.services.CadastroPortariaService;
-import com.portariacd.portaria.domain.models.vo.RegistroPortaria.AtualizaStatus;
-import com.portariacd.portaria.domain.models.vo.RegistroPortaria.RequestPortariaDTO;
-import com.portariacd.portaria.domain.models.vo.RegistroPortaria.RegistroPortariaDTO;
-import com.portariacd.portaria.domain.models.vo.RegistroPortaria.StatusAtualizadoDTO;
+import com.portariacd.portaria.domain.models.vo.RegistroPortaria.*;
 import com.portariacd.portaria.infrastructure.config.ConverteJson;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 @RestController
 @RequestMapping("portaria/v1")
 public class PortariaRegistroControler {
@@ -40,7 +37,6 @@ public class PortariaRegistroControler {
 
         try {
              var conver = converteJson.conversor(data, RegistroPortariaDTO.class);
-            System.out.println("data "+conver.criadorId());
             String resposta = service.cadastro(conver, file);
             Set<ConstraintViolation<RegistroPortariaDTO>> violations = validator.validate(conver);
             if (!violations.isEmpty()) {
@@ -114,5 +110,25 @@ public class PortariaRegistroControler {
     public  ResponseEntity<RequestPortariaDTO> visualizarRegistro(@RequestParam("registroId") Long registro) {
         RequestPortariaDTO portariaDTO = service.visualizarRegistro(registro);
         return ResponseEntity.ok().body(portariaDTO);
+    }
+    @PreAuthorize("@permissaoService.hasPermission(authentication, 'DELETAR_REGISTRO')")
+    @DeleteMapping("solicitacao/delete/registro")
+    public ResponseEntity<?> deleteRegistroPortaria(@RequestParam("registroId") Long registro,@RequestParam("usuarioId") Long usuarioId){
+       try {
+           service.deleteRegistroPortaria(registro,usuarioId);
+        return ResponseEntity.ok(Map.of("msg","Deletado com Sucesso"));
+       }catch (RuntimeException e){
+           throw new RuntimeException(e.getMessage());
+       }
+    }
+    @PutMapping("/update")
+    @PreAuthorize("@permissaoService.hasPermission(authentication, 'CRIAR_REGISTRO')")
+    public ResponseEntity<Map<String,String>> atualizaRegistro(@RequestBody @Valid AtualizaRegistro update){
+          try {
+              service.atualizaRegistro(update);
+              return ResponseEntity.ok().body(Map.of("msg","Atualizado com sucesso"));
+          }catch (Exception e){
+              throw new RuntimeException(e.getMessage());
+          }
     }
 }

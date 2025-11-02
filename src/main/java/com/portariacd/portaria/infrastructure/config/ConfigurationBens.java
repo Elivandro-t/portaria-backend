@@ -11,14 +11,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 @Configuration
 public class ConfigurationBens {
 
-    @Bean
-  public UsuarioFacture usuarioFacture(UsuarioRepository repository,
-                                       PerfilRepository perfilRepository,
-                                       AuthenticationManager authenticationManager,
-                                       TokenConfigure tokenConfigure
-    ){
-      return new UsuarioFacture(repository,perfilRepository,authenticationManager,tokenConfigure);
-  }
+//    @Bean
+//  public UsuarioFacture usuarioFacture(UsuarioRepository repository,
+//                                       PerfilRepository perfilRepository,
+//                                       AuthenticationManager authenticationManager,
+//                                       TokenConfigure tokenConfigure
+//    ){
+//      return new UsuarioFacture(repository,perfilRepository,authenticationManager,tokenConfigure);
+//  }
 
 //  @Bean
 //  public RegistroPortariaRepositoryAdapter registroPortariaFacture(RegistroVisitanteRepository repository

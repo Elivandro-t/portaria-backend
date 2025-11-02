@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "Entrada_visitante")
 @Getter
@@ -22,5 +21,4 @@ public class EntradaVisitanteEntity {
     private String nomeFiscal;
     private Long fiscalEntradaId;
     private String imagem;
-
 }

@@ -1,6 +1,9 @@
 package com.portariacd.portaria.infrastructure.adapters;
 
+import com.portariacd.portaria.application.services.LogAcaoService;
 import com.portariacd.portaria.domain.gateways.RegistroPortariaGatewayRepository;
+import com.portariacd.portaria.domain.models.vo.RegistroPortaria.AtualizaRegistro;
+import com.portariacd.portaria.domain.models.vo.usuarioVO.UsuarioRequestDTO;
 import com.portariacd.portaria.infrastructure.persistence.*;
 import com.portariacd.portaria.infrastructure.validation.ValidaNomeImagem;
 import com.portariacd.portaria.infrastructure.validation.ValidaStatusPortaria;
@@ -30,38 +33,47 @@ import java.util.Optional;
 
 @Component
 public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewayRepository {
-    @Value("${avatar}")
-    private String endpoint;
-    private String endpointUrl = "http://localhost:8080/portaria/v1";
+    @Value("${endpoint}")
+    private String endpointUrl;
     private final RegistroVisitanteRepository repository;
     private final VisitanteRepository visitante;
     private final HistoryRepository history;
     private final UsuarioRepository usuarioRepository;
     private final ValidaStatusPortaria validaStatusPortaria;
+    private final LogAcaoService service;
+
+
     public RegistroPortariaRepositoryAdapter(
             RegistroVisitanteRepository repository
             ,VisitanteRepository visitante
             ,UsuarioRepository usuarioRepository
             ,ValidaStatusPortaria validaStatusPortaria,
-            HistoryRepository history
+            HistoryRepository history,
+            LogAcaoService service
     ){
         this.repository = repository;
         this.visitante = visitante;
         this.usuarioRepository = usuarioRepository;
         this.validaStatusPortaria = validaStatusPortaria;
         this.history = history;
+        this.service = service;
     }
     @Override
     public String registroPortaria(RegistroPortariaDTO request, MultipartFile file){
       var visitanteEcontrado = visitante.findByOneByNumeroTelefone(request.nomeCompleto(),request.numeroTelefone());
-      if(visitanteEcontrado.isEmpty()){
-              String nameImagem = ValidaNomeImagem.criarDiretorio(file,"avatar",endpointUrl);;
+        String nameImagem = ValidaNomeImagem.criarDiretorio(file,"avatar",endpointUrl);;
+
+        if(visitanteEcontrado.isEmpty()){
               var visitanteEntity = new VisitanteEntity(request,nameImagem);
              VisitanteEntity novoVisitante =  visitante.save(visitanteEntity);
             CadastroVisitante(request,novoVisitante);
               return "Entrada solicitada";
       }
-
+        if(visitanteEcontrado.get()!=null){
+            visitanteEcontrado.get().setImagem(nameImagem);
+            visitanteEcontrado.get().setAtivo(true);
+            visitante.save(visitanteEcontrado.get());
+        }
         visitanteEcontrado.ifPresent(v -> CadastroVisitante(request, v));
       return "Solictacao registrada com sucesso: aguardando entrada";
 
@@ -76,8 +88,7 @@ public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewa
     }
 
     private void CadastroVisitante(RegistroPortariaDTO req, VisitanteEntity visitante){
-        System.out.println("bloco"+ req.bloco());
-        var registroEncontrado = repository.findAllByPlacaVeiculoAndNomeCompleto(req.nomeCompleto(),req.placaVeiculo());
+        var registroEncontrado = repository.findAllByPlacaVeiculoAndNomeCompleto(req.placaVeiculo(),req.numeroTelefone());
         if(registroEncontrado.isPresent()){
             throw  new RuntimeException("Visitante já possou um registr de entrada ativo");
         }
@@ -139,8 +150,10 @@ public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewa
         if(historyEntrada!=null){
             historyEntrada.UpdateHistoryInput(respostaSalva);
              history.save(historyEntrada);
+
          }
-          return new StatusAtualizadoDTO(respostaSalva,"Status alterado");
+        salvaLog(new UsuarioRequestDTO(usuarioFiscal),respostaSalva,"UPDATE_ENTRADA_HISTORY");
+        return new StatusAtualizadoDTO(respostaSalva,"Status alterado");
 
 
     }
@@ -201,11 +214,9 @@ public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewa
             }
             // atualiza o status da entrada do motorista
             RegistroVisitantePortariaEntity respostaSalva =  repository.save(resposta);
-
-            return new StatusAtualizadoDTO(respostaSalva,"Status alterado");
-
+        salvaLog(new UsuarioRequestDTO(usuarioFiscal),respostaSalva,"UPDATE_SAIDA_HISTORY");
+        return new StatusAtualizadoDTO(respostaSalva,"Status alterado");
     }
-
     @Override
     @Transactional
     public Map<String, List<RequestPortariaDTO>> solitacaoUsuario(Long usuarioID) {
@@ -242,7 +253,6 @@ public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewa
         }
        return  page;
     }
-
     @Override
     public RequestPortariaDTO visulizarRegistro(Long registro) {
         RequestPortariaDTO response = repository.findById(registro).map(RequestPortariaDTO::new).orElseThrow(
@@ -250,6 +260,52 @@ public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewa
         );
         return response;
     }
+    @Override
+    public void deleteRegistroPortaria(Long registroId,Long usuarioId) {
+        var usuario = usuarioRepository.findById(usuarioId).orElseThrow(
+                ()->new RuntimeException("Não foi possivel encontrar usuario: "+usuarioId)
+        );
+       var registro = repository.findById(registroId).orElseThrow(
+                ()-> new RuntimeException("Sem registro Encontrado")
+        );
+       if(registro.getStatus().equals(StatusPortaria.AGUARDANDO_SAIDA)){
+           throw new RuntimeException("Não foi possivel deletar o status: atualizar para "+StatusPortaria.SAIDA_LIBERADA);
+       }
+        salvaLog(new UsuarioRequestDTO(usuario),registro,"DELETE_ENTRADA_VISITANTE");
+        repository.delete(registro);
+    }
 
+    @Override
+    @Transactional
+    public void atualizaRegistro(AtualizaRegistro update) {
+        RegistroVisitantePortariaEntity registro = repository.findById(update.id()).orElseThrow(
+                ()-> new RuntimeException("Registro nao encontrado")
+        );
+        if(registro.getStatus().equals(StatusPortaria.AGUARDANDO_SAIDA)
+                || registro.getStatus().equals(StatusPortaria.SAIDA_LIBERADA)
+        ){
+            throw new RuntimeException("Não foi possivel atualizar a entrada");
+        }
+        registro.atualizarEntrada(update);
+        registro.getVisitante().setNumeroTelefone(update.numeroTelefone());
+        registro.getVisitante().setNomeCompleto(update.nomeCompleto());
+        repository.save(registro);
+
+
+
+
+    }
+
+    ;
+    private void salvaLog(UsuarioRequestDTO usuario, RegistroVisitantePortariaEntity registroVisitantePortaria,String acao){
+       service.registrarLog(
+               usuario,
+               acao,
+               String.format(
+                       "Usuário %s fez uma acão no ID %d ",
+                       usuario.nome(),
+                       registroVisitantePortaria.getId())
+       );
+   }
 
 }

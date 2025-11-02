@@ -19,6 +19,9 @@ public class WebConfigure implements WebMvcConfigurer {
         registry.addResourceHandler("/portaria/v1/saida/**")
                 .addResourceLocations("file:saida/")
                 .setCacheControl(CacheControl.maxAge(20, TimeUnit.MINUTES));
+        registry.addResourceHandler("/portaria/v1/usuario/**")
+                .addResourceLocations("file:usuario/")
+                .setCacheControl(CacheControl.maxAge(20, TimeUnit.MINUTES));
 
     }
 }

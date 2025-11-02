@@ -15,4 +15,8 @@ public class VisitanteService  {
     public Page<VisitanteDTO> listaVisitante(Pageable page, String busca) {
         return repository.listaVisitante(page,busca);
     }
+
+    public void deletarVisitenate(Long visitanteid, Long usuarioId) {
+         repository.deleteRegistro(visitanteid,usuarioId);
+    }
 }

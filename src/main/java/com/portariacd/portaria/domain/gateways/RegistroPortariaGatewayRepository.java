@@ -1,5 +1,6 @@
 package com.portariacd.portaria.domain.gateways;
 
+import com.portariacd.portaria.domain.models.vo.RegistroPortaria.AtualizaRegistro;
 import com.portariacd.portaria.domain.models.vo.RegistroPortaria.RequestPortariaDTO;
 import com.portariacd.portaria.domain.models.vo.RegistroPortaria.RegistroPortariaDTO;
 import com.portariacd.portaria.domain.models.vo.RegistroPortaria.StatusAtualizadoDTO;
@@ -24,4 +25,7 @@ public interface RegistroPortariaGatewayRepository {
      Page<RequestPortariaDTO> listaPendentes(Pageable pageable, Integer filial,String busca);
 
     RequestPortariaDTO visulizarRegistro(Long registro);
+    void deleteRegistroPortaria(Long registroId,Long usuarioId);
+
+    void atualizaRegistro(AtualizaRegistro update);
 }

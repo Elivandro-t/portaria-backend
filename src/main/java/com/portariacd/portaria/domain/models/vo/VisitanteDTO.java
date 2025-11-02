@@ -13,9 +13,9 @@ public record VisitanteDTO(
          String ocupacao,
         //opcional
          Integer filial,
+         String numeroTelefone,
          LocalDateTime dataCriacao,
          StatusTipoDeAcesso tipoAcesso,
-         String tipoMotorista,
           String tipoPessoa
 ) {
     public VisitanteDTO(Visitante v) {
@@ -24,9 +24,9 @@ public record VisitanteDTO(
                 v.getImagem(),
                 v.getOcupacao(),
                 v.getFilial(),
+                v.getNumeroTelefone(),
                 v.getDataCriacao(),
                 v.getTipoAcesso(),
-                v.getTipoMotorista(),
                 v.getTipoPessoa()
                 );
     }
@@ -37,9 +37,9 @@ public record VisitanteDTO(
                 v.getImagem(),
                 v.getOcupacao(),
                 v.getFilial(),
+                v.getNumeroTelefone(),
                 v.getDataCriacao(),
                 v.getTipoAcesso(),
-                v.getTipoMotorista(),
                 v.getTipoPessoa()
         );
     }

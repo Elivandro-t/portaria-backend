@@ -1,6 +1,7 @@
 package com.portariacd.portaria.application.services;
 
 import com.portariacd.portaria.domain.gateways.RegistroPortariaGatewayRepository;
+import com.portariacd.portaria.domain.models.vo.RegistroPortaria.AtualizaRegistro;
 import com.portariacd.portaria.domain.models.vo.RegistroPortaria.RequestPortariaDTO;
 import com.portariacd.portaria.domain.models.vo.RegistroPortaria.RegistroPortariaDTO;
 import com.portariacd.portaria.domain.models.vo.RegistroPortaria.StatusAtualizadoDTO;
@@ -46,5 +47,12 @@ public class CadastroPortariaService {
 
     public RequestPortariaDTO visualizarRegistro(Long registro) {
         return repository.visulizarRegistro(registro);
+    }
+    public void deleteRegistroPortaria(Long registroId,Long usuarioId){
+       repository.deleteRegistroPortaria(registroId,usuarioId);
+    }
+
+    public void atualizaRegistro(AtualizaRegistro update) {
+        repository.atualizaRegistro(update);
     }
 }

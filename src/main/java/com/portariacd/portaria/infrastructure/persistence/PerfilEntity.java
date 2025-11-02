@@ -1,5 +1,4 @@
 package com.portariacd.portaria.infrastructure.persistence;
-
 import com.portariacd.portaria.domain.models.auth.Perfil;
 import com.portariacd.portaria.infrastructure.persistence.funcao.PermissionEntity;
 import jakarta.persistence.*;
@@ -10,7 +9,6 @@ import lombok.Setter;
 
 import java.util.List;
 import java.util.Set;
-
 @Entity
 @Table(name = "perfil")
 @AllArgsConstructor
@@ -26,10 +24,7 @@ public class PerfilEntity {
     List<UsuarioEntity> usuario;
     @ManyToMany(fetch = FetchType.EAGER)
     Set<PermissionEntity> permissoes;
-
     public PerfilEntity(Perfil pefil) {
         this.nome = pefil.getNome();
     }
-
-
 }

@@ -18,6 +18,9 @@ public class Perfil {
             this.permissoes = perfil.getPermissoes().stream().map(Permission::new).collect(Collectors.toSet());
         }
     }
+    public Perfil() {
+
+    }
 
     public long getId() {
         return id;

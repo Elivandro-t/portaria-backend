@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 @Entity
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class VisitanteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,21 +29,22 @@ public class VisitanteEntity {
     private LocalDateTime dataCriacao;
     @Enumerated(EnumType.STRING)
     private StatusTipoDeAcesso tipoAcesso;
-    private String tipoMotorista;
     private  String tipoPessoa;
+    private Boolean ativo;
 
     public VisitanteEntity(RegistroPortariaDTO request, String image) {
         this.nomeCompleto = request.nomeCompleto();
         if(request.filial()!=null){
             this.filial = request.filial();
         }
-        this.ocupacao = request.ocupacao();
+        this.ocupacao = request.tipPessoa();
         this.numeroTelefone = request.numeroTelefone();
         this.imagem = image;
         this.dataCriacao = LocalDateTime.now();
+        this.ativo = true;
+
         this.placaCarro = request.placaVeiculo();
         this.tipoAcesso = StatusTipoDeAcesso.StatusAdd(request.tipoAcesso());
-        this.tipoMotorista = request.tipoMotorista();
         this.tipoPessoa = request.tipPessoa();
     }
 

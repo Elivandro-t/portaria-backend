@@ -19,6 +19,7 @@ public record RequestPortariaDTO(
         UsuarioRequestDTO autorizador,
         LocalDateTime dataCriacao,
         String status,
+        String ocupacaoLiberada,
         Boolean ativo,
         EntradaVisitanteDTO entrada,
         SaidaVisitanteDTO saida
@@ -36,6 +37,7 @@ public record RequestPortariaDTO(
                 e.getCriadorId()!=null ? new UsuarioRequestDTO(e.getCriadorId()):null,
                 e.getDataCriacao(),
                 e.getStatus().name(),
+                e.getOcupacaoLiberad(),
                 e.getAtivo(),
                 e.getEntradaVisitante()!=null ? new EntradaVisitanteDTO(e.getEntradaVisitante()):null,
                 e.getSaidaVisitante()!=null ? new SaidaVisitanteDTO(e.getSaidaVisitante()):null
@@ -56,6 +58,7 @@ public record RequestPortariaDTO(
                 e.getCriador()!=null ? new UsuarioRequestDTO(e.getCriador()):null,
                 e.getDataCriacao(),
                 e.getStatus().name(),
+                e.getOcupacaoLiberada(),
                 e.getAtivo(),
                 e.getEntradaVisitante()!=null ? new EntradaVisitanteDTO(e.getEntradaVisitante()):null,
                 e.getSaidaVisitante()!=null ? new SaidaVisitanteDTO(e.getSaidaVisitante()):null

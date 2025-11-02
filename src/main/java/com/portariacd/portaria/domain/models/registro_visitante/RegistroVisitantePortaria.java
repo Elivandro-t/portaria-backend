@@ -18,7 +18,7 @@ public class RegistroVisitantePortaria {
     private SaidaVisitante saidaVisitante;
     private EntradaVisitante entradaVisitante;
     private UsuarioEntity criadorId;
-    private String ocupacao;
+    private String ocupacaoLiberada;
     private LocalDateTime dataCriacao;
     private Boolean ativo;
     private String protocolo;
@@ -128,12 +128,12 @@ public class RegistroVisitantePortaria {
         this.entradaVisitante = entradaVisitante;
     }
 
-    public String getOcupacao() {
-        return ocupacao;
+    public String getOcupacaoLiberad() {
+        return ocupacaoLiberada;
     }
 
-    public void setOcupacao(String ocupacao) {
-        this.ocupacao = ocupacao;
+    public void setOcupacaoLiberada(String ocupacao) {
+        this.ocupacaoLiberada = ocupacao;
     }
 
     public UsuarioEntity getCriadorId() {

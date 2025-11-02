@@ -11,21 +11,18 @@ public class Visitante {
     private String ocupacao;
     //opcional
     private Integer filial;
+    private String numeroTelefone;
     private LocalDateTime dataCriacao;
     private StatusTipoDeAcesso tipoAcesso;
-    private String tipoMotorista;
     private  String tipoPessoa;
-
-
     public Visitante(VisitanteEntity visitante) {
         this.id = visitante.getId();
         this.nomeCompleto = visitante.getNomeCompleto();
         this.dataCriacao = visitante.getDataCriacao();
         this.imagem = visitante.getImagem();
-        this.ocupacao = visitante.getOcupacao();
         this.tipoAcesso = visitante.getTipoAcesso();
-        this.tipoMotorista = visitante.getTipoMotorista();
         this.tipoPessoa = visitante.getTipoPessoa();
+        this.numeroTelefone = visitante.getNumeroTelefone();
 
     }
 
@@ -45,13 +42,6 @@ public class Visitante {
         this.tipoPessoa = tipoPessoa;
     }
 
-    public String getTipoMotorista() {
-        return tipoMotorista;
-    }
-
-    public void setTipoMotorista(String tipoMotorista) {
-        this.tipoMotorista = tipoMotorista;
-    }
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
@@ -95,6 +85,14 @@ public class Visitante {
 
     public StatusTipoDeAcesso getTipoAcesso() {
         return tipoAcesso;
+    }
+
+    public String getNumeroTelefone() {
+        return numeroTelefone;
+    }
+
+    public void setNumeroTelefone(String numeroTelefone) {
+        this.numeroTelefone = numeroTelefone;
     }
 
     public void setTipoAcesso(StatusTipoDeAcesso tipoAcesso) {

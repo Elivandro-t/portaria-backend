@@ -1,26 +1,27 @@
 package com.portariacd.portaria.infrastructure.persistence;
-
 import com.portariacd.portaria.domain.models.auth.Usuario;
 import com.portariacd.portaria.infrastructure.persistence.registroVisitante.RegistroVisitantePortariaEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-
 @Entity
 @Table(name = "usuario")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class UsuarioEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,6 +71,15 @@ public class UsuarioEntity implements UserDetails {
            }
         return authorities;
     }
+    public String criptofrafiaDeSenha(
+            String password) {
+        return new BCryptPasswordEncoder().encode(password);
+    }
+
+    public void atualizaSenha(String password){
+      this.password =  criptofrafiaDeSenha(password);
+    }
+
 
     @Override
     public String getUsername() {

@@ -14,17 +14,15 @@ public record RegistroPortariaDTO(
         String tipoAcesso,
         Integer filial,
         @NotBlank
-        String tipoMotorista,
-        @NotBlank
         String tipPessoa,
+        @NotBlank
+        String ocupacaoLiberada,
         @NotNull
         String descricao,
         @NotNull
         Long criadorId,
         @NotBlank
-        String ocupacao,
-         @NotBlank
-         String bloco
+        String bloco
 
 ) {
 }

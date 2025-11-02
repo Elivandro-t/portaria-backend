@@ -1,6 +1,7 @@
 package com.portariacd.portaria.infrastructure.persistence.registroVisitante;
 
 import com.portariacd.portaria.domain.models.registro_visitante.StatusPortaria;
+import com.portariacd.portaria.domain.models.vo.RegistroPortaria.AtualizaRegistro;
 import com.portariacd.portaria.domain.models.vo.RegistroPortaria.RegistroPortariaDTO;
 import com.portariacd.portaria.infrastructure.persistence.UsuarioEntity;
 import com.portariacd.portaria.infrastructure.persistence.VisitanteEntity;
@@ -26,6 +27,7 @@ public class RegistroVisitantePortariaEntity {
     @ManyToOne
     private VisitanteEntity visitante;
     private String placaVeiculo;
+    private String ocupacaoLiberada;
     private LocalDateTime dataCriacao;
     @Lob
     @Column(name = "descricao",columnDefinition = "TEXT")
@@ -51,9 +53,16 @@ public class RegistroVisitantePortariaEntity {
       this.dataCriacao = LocalDateTime.now();
       this.bloco = req.bloco();
       this.descricao = req.descricao();
+      this.ocupacaoLiberada = req.ocupacaoLiberada();
       this.criador = usuario;
       this.filialSolicitado = usuario.getFilial();
       this.ativo = true;
+    }
+
+    public void atualizarEntrada(AtualizaRegistro update) {
+        this.placaVeiculo = update.placaVeiculo();
+        this.nomeCompleto = update.nomeCompleto();
+        this.bloco = update.bloco();
     }
 //    @PrePersist
 //    public void gerarId() {

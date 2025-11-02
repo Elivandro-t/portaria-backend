@@ -44,8 +44,9 @@ public class SecurityConfiguration {
                                 .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/portaria/v1/avatar/*").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/portaria/v1/entrada/*").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/portaria/v1/usuario/*").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/portaria/v1/saida/*").permitAll()
-                        .anyRequest().authenticated()
+                                .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityConfiguration, UsernamePasswordAuthenticationFilter.class)
                 .build();

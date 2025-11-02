@@ -5,6 +5,7 @@ import com.portariacd.portaria.infrastructure.persistence.registroVisitante.Regi
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -21,5 +22,12 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity,Long> {
             OR LOWER(p.ocupacaoOperacional) LIKE LOWER(CONCAT('%', :busca, '%'))""")
     Page<UsuarioEntity> findAllByUsuario( Pageable pageable, @Param("busca") String busca);
     @Query("SELECT p FROM UsuarioEntity p ORDER BY p.id DESC")
-    Page<UsuarioRequestDTO> findAllByUsuarioRegistrado(Pageable pageable);
+    Page<UsuarioEntity> findAllByUsuarioRegistrado(Pageable pageable);
+
+      @Modifying
+      @Query("""
+              UPDATE UsuarioEntity p
+              SET p.avatar=:nomeImagem WHERE p.id=:id
+              """)
+    void salvaImagem(@Param("nomeImagem") String nomeImagem,@Param("id") Long id);
 }
