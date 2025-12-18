@@ -1,0 +1,33 @@
+package com.portariacd.modulos.Moduloportaria.infrastructure.adapters;
+
+import com.portariacd.modulos.Moduloportaria.domain.gateways.LogGatewayRepository;
+import com.portariacd.modulos.Moduloportaria.domain.models.registro_visitante.LogAcaoDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.vo.usuarioVO.UsuarioRequestDTO;
+import com.portariacd.modulos.Moduloportaria.infrastructure.adapters.buscaLog.BuscaLogsSpec;
+import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.LogRepository;
+import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.log.LogAcaoEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
+
+@Component
+public class LogAdapter implements LogGatewayRepository {
+    private final LogRepository repository;
+    public LogAdapter(LogRepository repository){
+        this.repository = repository;
+    }
+    @Override
+    public void registrarLog(UsuarioRequestDTO usuario, String acao, String descricao) {
+        LogAcaoEntity log = new LogAcaoEntity(usuario, acao, descricao,usuario.filial());
+        repository.save(log);
+    };
+    @Override
+    public Page<LogAcaoDTO> listaAcoes(Pageable page, String busca) {
+        System.out.println("busca request "+busca);
+        var spec = Specification.allOf(
+              BuscaLogsSpec.busca(busca)
+        );
+        return repository.findAll(spec,page).map(LogAcaoDTO::new);
+    }
+};

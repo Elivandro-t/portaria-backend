@@ -3,10 +3,11 @@ FROM ubuntu:latest as build
 RUN apt-get update && apt-get install -y \
     openjdk-17-jdk \
     maven
-
 WORKDIR /portaria
 
 COPY pom.xml .
+RUN mvn dependency:go-offline
+
 
 COPY . .
 
