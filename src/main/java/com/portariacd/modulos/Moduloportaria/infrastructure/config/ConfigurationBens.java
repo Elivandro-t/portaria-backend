@@ -6,12 +6,12 @@ import org.springframework.context.annotation.Configuration;
 public class ConfigurationBens {
 
 //    @Bean
-//  public UsuarioFacture usuarioFacture(UsuarioRepository repository,
+//  public UsuarioAdpter usuarioFacture(UsuarioRepository repository,
 //                                       PerfilRepository perfilRepository,
 //                                       AuthenticationManager authenticationManager,
 //                                       TokenConfigure tokenConfigure
 //    ){
-//      return new UsuarioFacture(repository,perfilRepository,authenticationManager,tokenConfigure);
+//      return new UsuarioAdpter(repository,perfilRepository,authenticationManager,tokenConfigure);
 //  }
 
 //  @Bean

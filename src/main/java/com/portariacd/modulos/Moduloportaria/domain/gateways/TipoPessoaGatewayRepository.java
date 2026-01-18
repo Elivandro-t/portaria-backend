@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.domain.gateways;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.tipoPessoa.TipoPessoaDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.tipoPessoa.TipoPessoaReuestDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.tipoPessoa.TipoPessoaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.tipoPessoa.TipoPessoaReuestDTO;
 
 import java.util.List;
 import java.util.Map;

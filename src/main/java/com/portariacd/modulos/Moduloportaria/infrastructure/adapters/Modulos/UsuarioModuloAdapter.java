@@ -1,8 +1,8 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.adapters.Modulos;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.ModuloGatewayRepository;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.SistemaAcessoDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.usuarioVO.SistemaAcessoUsuarioDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.FilialDTOMod;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.usuarioVO.SistemaAcessoUsuarioDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.RespositorySistemaAcesso;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.UsuarioEntity;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.UsuarioRepository;
@@ -28,24 +28,30 @@ public class UsuarioModuloAdapter implements ModuloGatewayRepository {
       this.usuarioRepository = usuarioRepository;
   }
 
-  public void addPermission(List<ModuleDTO> pemission, Long usuarioId){
+  public void addPermission(List<ModuleDTO> pemission, FilialDTOMod mod, Long usuarioId){
       UsuarioEntity usuario = usuarioRepository.findById(usuarioId).orElseThrow(
               ()-> new RuntimeException("Erro ao buscar Usuario")
       );
+      if(mod.filial()!=null){
+          usuario.setFilial(mod.filial());
+          usuarioRepository.save(usuario);
+      }
       for (ModuleDTO modulo:pemission){
+
        var acesso = respositoryAcesso.findById(modulo.permissionId());
           Optional<UsuarioModuloEntity> existente =
                   repository.findByUsuarioIdAndModuloId(usuarioId, modulo.permissionId());
           UsuarioModuloEntity entity;
-
           if(existente.isPresent()) {
               entity =existente.get();
               entity.setAtivo(modulo.ativo());
+              repository.save(entity);
        }else{
               entity = new UsuarioModuloEntity(usuario, acesso.get());
               entity.setAtivo(modulo.ativo());
+              repository.save(entity);
+
           }
-          repository.save(entity);
 
       }
   }

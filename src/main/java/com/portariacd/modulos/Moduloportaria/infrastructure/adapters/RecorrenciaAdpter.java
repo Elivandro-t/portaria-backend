@@ -1,8 +1,8 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.adapters;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.RecorrenciaInterfaceGateway;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.recorrencia.RegistroRecorrenciaDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.recorrencia.RequestRecorrenciaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.recorrencia.RegistroRecorrenciaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.recorrencia.RequestRecorrenciaDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.RecorrenciaRepository;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.UsuarioRepository;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.funcao.PermissionEntity;

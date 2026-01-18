@@ -1,8 +1,8 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.adapters;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.FilialInterfaceGateway;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.filialDTO.RegistroFilialDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.filialDTO.RequestFilialDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.filialDTO.RegistroFilialDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.filialDTO.RequestFilialDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.FilialRepository;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.filial.Filial;
 import org.springframework.stereotype.Component;

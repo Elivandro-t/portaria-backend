@@ -3,10 +3,10 @@ package com.portariacd.modulos.Moduloportaria.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.portariacd.modulos.Moduloportaria.services.CadastroPortariaService;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.*;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.*;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.config.ConverteJson;
-import com.portariacd.modulos.Moduloportaria.infrastructure.factory.CadastroTypeFactory;
+import com.portariacd.modulos.Moduloportaria.infrastructure.facture.CadastroTypeFacture;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Valid;
@@ -160,9 +160,9 @@ public class PortariaRegistroControler {
     }
     @PostMapping("/factory")
     public ResponseEntity<?> registroPortariaRequest(@RequestPart("data") @Valid String jsonString, @RequestParam(value = "file",required = false) MultipartFile file) throws JsonProcessingException {
-        CadastroTypeFactory mapper =
-                new ObjectMapper().readValue(jsonString, CadastroTypeFactory.class);
-        Set<ConstraintViolation<CadastroTypeFactory>> violations =
+        CadastroTypeFacture mapper =
+                new ObjectMapper().readValue(jsonString, CadastroTypeFacture.class);
+        Set<ConstraintViolation<CadastroTypeFacture>> violations =
                 validator.validate(mapper);
 
         if (!violations.isEmpty()) {

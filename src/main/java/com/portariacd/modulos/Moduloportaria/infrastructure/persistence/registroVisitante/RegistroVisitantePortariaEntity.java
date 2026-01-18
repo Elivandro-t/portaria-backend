@@ -1,9 +1,9 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.persistence.registroVisitante;
 
 import com.portariacd.modulos.Moduloportaria.domain.models.registro_visitante.StatusPortaria;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.AtualizaRegistro;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.RegistroPortariaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.AtualizaRegistro;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.RegistroPortariaDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.UsuarioEntity;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.VisitanteEntity;
 import jakarta.persistence.*;

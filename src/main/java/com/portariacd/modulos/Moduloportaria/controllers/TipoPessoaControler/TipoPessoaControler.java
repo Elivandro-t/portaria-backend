@@ -1,8 +1,8 @@
 package com.portariacd.modulos.Moduloportaria.controllers.TipoPessoaControler;
 
 import com.portariacd.modulos.Moduloportaria.TipoPessoa.TipoPessoaService;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.tipoPessoa.TipoPessoaDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.tipoPessoa.TipoPessoaReuestDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.tipoPessoa.TipoPessoaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.tipoPessoa.TipoPessoaReuestDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

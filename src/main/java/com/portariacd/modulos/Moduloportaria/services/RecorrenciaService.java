@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.services;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.RecorrenciaInterfaceGateway;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.recorrencia.RequestRecorrenciaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.recorrencia.RequestRecorrenciaDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

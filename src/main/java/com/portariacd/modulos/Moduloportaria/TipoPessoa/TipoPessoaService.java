@@ -1,8 +1,8 @@
 package com.portariacd.modulos.Moduloportaria.TipoPessoa;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.TipoPessoaGatewayRepository;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.tipoPessoa.TipoPessoaDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.tipoPessoa.TipoPessoaReuestDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.tipoPessoa.TipoPessoaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.tipoPessoa.TipoPessoaReuestDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

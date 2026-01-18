@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.controllers;
 
 import com.portariacd.modulos.Moduloportaria.services.HistoryService;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.historyDTO.HistoryDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.historyDTO.HistoryDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -75,7 +75,7 @@ public class UsuarioEntity implements UserDetails {
         Set<String> rolesPermition = Set.of(
                 "ROLE_ADMIN",
                 "FISCAL",
-                "AUTORIZADO"
+                "AUTORIZADOR"
         );
         List<GrantedAuthority> authorities = new ArrayList<>();
 //        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
@@ -89,13 +89,13 @@ public class UsuarioEntity implements UserDetails {
            }
         return authorities;
     }
-    public String criptofrafiaDeSenha(
+    public String criptografiaDeSenha(
             String password) {
         return new BCryptPasswordEncoder().encode(password);
     }
 
     public void atualizaSenha(String password){
-      this.password =  criptofrafiaDeSenha(password);
+      this.password =  criptografiaDeSenha(password);
     }
 
 

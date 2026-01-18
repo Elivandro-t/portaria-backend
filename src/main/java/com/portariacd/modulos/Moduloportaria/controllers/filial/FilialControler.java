@@ -1,8 +1,8 @@
 package com.portariacd.modulos.Moduloportaria.controllers.filial;
 
 import com.portariacd.modulos.Moduloportaria.services.FilialService;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.filialDTO.RegistroFilialDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.filialDTO.RequestFilialDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.filialDTO.RegistroFilialDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.filialDTO.RequestFilialDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.config.TokenConfigure;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

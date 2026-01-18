@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.services;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.PerfilGatewayRepository;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.perfilDTO.PerfilResponseDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.perfilDTO.PerfilResponseDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

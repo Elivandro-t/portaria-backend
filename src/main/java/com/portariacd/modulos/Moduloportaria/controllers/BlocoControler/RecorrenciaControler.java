@@ -2,7 +2,7 @@ package com.portariacd.modulos.Moduloportaria.controllers.BlocoControler;
 
 import com.auth0.jwt.interfaces.Claim;
 import com.portariacd.modulos.Moduloportaria.services.RecorrenciaService;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.recorrencia.RequestRecorrenciaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.recorrencia.RequestRecorrenciaDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.config.TokenConfigure;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

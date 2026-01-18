@@ -2,8 +2,8 @@ package com.portariacd.modulos.Moduloportaria.controllers;
 
 import com.portariacd.modulos.Moduloportaria.services.UsuarioService;
 import com.portariacd.modulos.Moduloportaria.domain.models.auth.AlteraSenhaDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.CadastroUsuarioDto;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.usuarioVO.*;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.CadastroUsuarioDto;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.usuarioVO.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;

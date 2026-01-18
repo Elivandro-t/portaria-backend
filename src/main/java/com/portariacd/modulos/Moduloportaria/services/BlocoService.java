@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.services;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.BlocoInterfaceGateway;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.bloco.RequestBlocoDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.bloco.RequestBlocoDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

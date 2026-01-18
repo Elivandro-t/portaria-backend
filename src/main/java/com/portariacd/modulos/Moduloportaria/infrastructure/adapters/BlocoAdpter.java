@@ -1,8 +1,8 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.adapters;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.BlocoInterfaceGateway;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.bloco.RegistroBlocoDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.bloco.RequestBlocoDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.bloco.RegistroBlocoDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.bloco.RequestBlocoDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.BlocoRepository;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.blocos.BlocoEntity;
 import org.springframework.stereotype.Component;

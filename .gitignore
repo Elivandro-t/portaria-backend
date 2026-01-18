@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+.git
+.gitignore
+target
+node_modules
+*.log
+Dockerfile
+README.md

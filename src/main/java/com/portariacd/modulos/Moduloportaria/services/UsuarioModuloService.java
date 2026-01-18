@@ -1,8 +1,8 @@
 package com.portariacd.modulos.Moduloportaria.services;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.ModuloGatewayRepository;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.SistemaAcessoDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.usuarioVO.SistemaAcessoUsuarioDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.FilialDTOMod;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.usuarioVO.SistemaAcessoUsuarioDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.modulosPerfil.ModuleDTO;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ public class UsuarioModuloService {
     public UsuarioModuloService(ModuloGatewayRepository repository){
         this.repository = repository;
     }
-    public void addPermission(@Valid List<ModuleDTO> pemission, Long usuarioId){
-        repository.addPermission(pemission,usuarioId);
+    public void addPermission(@Valid List<ModuleDTO> pemission, FilialDTOMod mod, Long usuarioId){
+        repository.addPermission(pemission,mod,usuarioId);
     }
     public List<SistemaAcessoUsuarioDTO> lista(){
        return repository.listaPermission();

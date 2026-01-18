@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.controllers;
 
 import com.portariacd.modulos.Moduloportaria.services.PerfilService;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.perfilDTO.PerfilResponseDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.perfilDTO.PerfilResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

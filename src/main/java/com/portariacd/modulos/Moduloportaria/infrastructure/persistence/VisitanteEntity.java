@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.persistence;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.RegistroPortariaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.RegistroPortariaDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.recorrencia.Recorrencia;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

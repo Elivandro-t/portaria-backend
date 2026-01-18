@@ -42,7 +42,7 @@ public interface RegistroVisitanteRepository extends JpaRepository<RegistroVisit
 
     @Query("""
             SELECT p FROM RegistroVisitantePortariaEntity p 
-            WHERE p.filialSolicitado = :filial 
+            WHERE (p.filialSolicitado = :filial OR p.visitante.acessoGlobal = true )
             AND (
             LOWER(p.nomeCompleto) LIKE LOWER(CONCAT('%', :busca, '%'))
             OR LOWER(p.placaVeiculo) LIKE LOWER(CONCAT('%', :busca, '%'))
@@ -88,7 +88,7 @@ public interface RegistroVisitanteRepository extends JpaRepository<RegistroVisit
     List<RegistroVisitantePortariaEntity> findAllByAtivoTrue();
     @Query("""
             SELECT p FROM RegistroVisitantePortariaEntity p 
-            WHERE p.filialSolicitado = :filial 
+            WHERE (p.filialSolicitado = :filial OR p.visitante.acessoGlobal = true  )
             AND p.status = :status
             AND p.ativo = true 
             AND COALESCE(p.visitante.bloqueioAcesso, FALSE) = FALSE

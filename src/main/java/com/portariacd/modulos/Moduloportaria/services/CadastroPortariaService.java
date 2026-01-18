@@ -1,11 +1,11 @@
 package com.portariacd.modulos.Moduloportaria.services;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.RegistroPortariaGatewayRepository;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.AtualizaRegistro;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.RequestPortariaDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.StatusAtualizadoDTO;
-import com.portariacd.modulos.Moduloportaria.infrastructure.factory.CadastroTypeFactory;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.AtualizaRegistro;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.RequestPortariaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.StatusAtualizadoDTO;
+import com.portariacd.modulos.Moduloportaria.infrastructure.facture.CadastroTypeFacture;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -59,7 +59,7 @@ public class CadastroPortariaService {
     public void atualizaRegistro(AtualizaRegistro update) {
         repository.atualizaRegistro(update);
     }
-    public String registroPortariaRequest(CadastroTypeFactory data, MultipartFile file) {
+    public String registroPortariaRequest(CadastroTypeFacture data, MultipartFile file) {
         return repository.registroPortariaRequest(data,file);
     }
 }

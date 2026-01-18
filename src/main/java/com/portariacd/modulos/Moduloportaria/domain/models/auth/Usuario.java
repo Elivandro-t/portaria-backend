@@ -1,8 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.domain.models.auth;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.CadastroUsuarioDto;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.SistemaAcessoDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.usuarioVO.SistemaAcessoUsuarioDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.CadastroUsuarioDto;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.usuarioVO.SistemaAcessoUsuarioDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.UsuarioEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

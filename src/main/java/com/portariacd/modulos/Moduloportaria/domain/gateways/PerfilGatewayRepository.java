@@ -1,6 +1,6 @@
 package com.portariacd.modulos.Moduloportaria.domain.gateways;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.perfilDTO.PerfilResponseDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.perfilDTO.PerfilResponseDTO;
 
 import java.util.List;
 import java.util.Map;

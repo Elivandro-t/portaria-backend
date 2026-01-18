@@ -1,6 +1,6 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.persistence.funcao;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.SistemaAcessoDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.SistemaAcessoDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

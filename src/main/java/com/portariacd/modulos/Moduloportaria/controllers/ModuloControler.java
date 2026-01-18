@@ -1,9 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.controllers;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.SistemaAcessoDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.usuarioVO.SistemaAcessoUsuarioDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.usuarioVO.SistemaAcessoUsuarioDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.modulosPerfil.JsonModule;
-import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.modulosPerfil.ModuleDTO;
 import com.portariacd.modulos.Moduloportaria.services.UsuarioModuloService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +19,7 @@ public class ModuloControler {
     }
    @PostMapping("/add/{usuarioId}")
     public ResponseEntity<?> addAcess(@RequestBody @Valid JsonModule module, @PathVariable Long usuarioId){
-        service.addPermission(module.lista(),usuarioId);
+        service.addPermission(module.lista(),module.mod(),usuarioId);
         return ResponseEntity.ok().body(Map.of("msg","Adicionando com sucesso!"));
     }
     @GetMapping("/lista")

@@ -8,7 +8,6 @@ WORKDIR /portaria
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
-
 COPY . .
 
 RUN mvn clean package

@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.domain.gateways;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.recorrencia.RegistroRecorrenciaDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.recorrencia.RequestRecorrenciaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.recorrencia.RegistroRecorrenciaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.recorrencia.RequestRecorrenciaDTO;
 
 import java.util.List;
 

@@ -1,12 +1,11 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.adapters;
-
 import com.portariacd.modulos.Moduloportaria.services.LogAcaoService;
 import com.portariacd.modulos.Moduloportaria.domain.gateways.RegistroPortariaGatewayRepository;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.*;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.EmTeste.AtualizaRegistroPortariaDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.usuarioVO.UsuarioRequestDTO;
-import com.portariacd.modulos.Moduloportaria.infrastructure.factory.CadastroTypeFactory;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.*;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.EmTeste.AtualizaRegistroPortariaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.usuarioVO.UsuarioRequestDTO;
+import com.portariacd.modulos.Moduloportaria.infrastructure.facture.CadastroTypeFacture;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.*;
 import com.portariacd.modulos.Moduloportaria.infrastructure.validation.ValidaNomeImagem;
 import com.portariacd.modulos.Moduloportaria.infrastructure.validation.ValidaStatusPortaria;
@@ -26,11 +25,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 @Component
 public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewayRepository {
     @Value("${endpoint}")
@@ -359,7 +361,7 @@ public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewa
 
     @Override
     @Transactional
-    public String registroPortariaRequest(CadastroTypeFactory data, MultipartFile file) {
+    public String registroPortariaRequest(CadastroTypeFacture data, MultipartFile file) {
         if(data instanceof AtualizaRegistroPortariaDTO request){
             VisitanteEntity v = visitante.findById(request.getVisitanteId()).orElseThrow(
                     ()->new RuntimeException("Visitante não encontrado")
@@ -404,6 +406,15 @@ public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewa
        if(registro.getStatus().equals(StatusPortaria.AGUARDANDO_SAIDA)){
            throw new RuntimeException("Não foi possivel deletar o status: atualizar para "+StatusPortaria.SAIDA_LIBERADA);
        }
+        if (registro.getEntradaVisitante() != null ) {
+            String url = registro.getEntradaVisitante().getImagem();
+            String nomeArquivo = url.substring(url.lastIndexOf("/") + 1);
+            DelteImagem(url,"entrada");
+        }
+        if (registro.getSaidaVisitante() != null ) {
+            String url = registro.getSaidaVisitante().getImagem();
+            DelteImagem(url,"saida");
+        }
         salvaLog(new UsuarioRequestDTO(usuario),registro,"DELETE_ENTRADA_VISITANTE");
         repository.delete(registro);
     }
@@ -458,5 +469,16 @@ public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewa
                        registroVisitantePortaria.getId())
        );
    }
+
+    private void DelteImagem(String url,String direct){
+        String nomeArquivo = url.substring(url.lastIndexOf("/") + 1);
+        Path path = Paths.get(direct,nomeArquivo);
+
+        try {
+            Files.deleteIfExists(path);
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao excluir imagem: " + path, e);
+        }
+    }
 
 }

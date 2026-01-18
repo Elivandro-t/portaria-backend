@@ -2,8 +2,8 @@ package com.portariacd.modulos.Moduloportaria.controllers;
 
 import com.portariacd.modulos.Moduloportaria.services.VisitanteService;
 import com.portariacd.modulos.Moduloportaria.domain.models.visitante.StatusTypeDeleteVisitante;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.VisitanteDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.VisitanteFiltroDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.VisitanteDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.VisitanteFiltroDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

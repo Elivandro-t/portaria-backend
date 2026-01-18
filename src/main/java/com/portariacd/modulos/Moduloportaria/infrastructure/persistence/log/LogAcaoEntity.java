@@ -1,6 +1,6 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.persistence.log;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.usuarioVO.UsuarioRequestDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.usuarioVO.UsuarioRequestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.controllers.BlocoControler;
 
 import com.portariacd.modulos.Moduloportaria.services.BlocoService;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.bloco.RequestBlocoDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.bloco.RequestBlocoDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

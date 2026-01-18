@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.domain.models.registro_visitante;
 
 import com.portariacd.modulos.Moduloportaria.domain.models.Visitante;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.recorrencia.RequestRecorrenciaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.recorrencia.RequestRecorrenciaDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.UsuarioEntity;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.registroVisitante.RegistroVisitantePortariaEntity;
 

@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.domain.gateways;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.bloco.RegistroBlocoDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.bloco.RequestBlocoDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.bloco.RegistroBlocoDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.bloco.RequestBlocoDTO;
 
 import java.util.List;
 

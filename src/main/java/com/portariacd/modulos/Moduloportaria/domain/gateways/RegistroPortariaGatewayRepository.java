@@ -1,10 +1,10 @@
 package com.portariacd.modulos.Moduloportaria.domain.gateways;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.AtualizaRegistro;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.RequestPortariaDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.RegistroPortaria.StatusAtualizadoDTO;
-import com.portariacd.modulos.Moduloportaria.infrastructure.factory.CadastroTypeFactory;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.AtualizaRegistro;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.EmTeste.RegistroPortariaRequestDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.RequestPortariaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.RegistroPortaria.StatusAtualizadoDTO;
+import com.portariacd.modulos.Moduloportaria.infrastructure.facture.CadastroTypeFacture;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +30,7 @@ public interface RegistroPortariaGatewayRepository {
 
     void atualizaRegistro(AtualizaRegistro update);
     Page<RequestPortariaDTO> FindAllPortarias(Pageable pageable, Integer filial,String busca,Boolean ativo);
-    String registroPortariaRequest(CadastroTypeFactory data, MultipartFile file);
+    String registroPortariaRequest(CadastroTypeFacture data, MultipartFile file);
 
 
 }

@@ -1,25 +1,24 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.config;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.SistemaAcessoDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.usuarioVO.SistemaStatusEnun;
-import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.funcao.SistemaAcesso;
-import com.portariacd.modulos.Moduloportaria.services.UsuarioService;
 import com.portariacd.modulos.Moduloportaria.domain.gateways.BlocoInterfaceGateway;
 import com.portariacd.modulos.Moduloportaria.domain.gateways.FilialInterfaceGateway;
 import com.portariacd.modulos.Moduloportaria.domain.gateways.RecorrenciaInterfaceGateway;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.CadastroUsuarioDto;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.bloco.RegistroBlocoDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.filialDTO.RegistroFilialDTO;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.recorrencia.RegistroRecorrenciaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.CadastroUsuarioDto;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.SistemaAcessoDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.bloco.RegistroBlocoDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.recorrencia.RegistroRecorrenciaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.usuarioVO.SistemaStatusEnun;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.*;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.blocos.BlocoEntity;
-import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.filial.Filial;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.funcao.PermissionEntity;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.funcao.PermissionRepository;
+import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.funcao.SistemaAcesso;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.recorrencia.Recorrencia;
+import com.portariacd.modulos.Moduloportaria.services.UsuarioService;
 import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
 import java.util.*;
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -66,7 +65,6 @@ public class DataInitializer implements CommandLineRunner {
         criarUsuario();
         save();
         criarRecorrencia();
-        criarFiliais();
         CriarModulos();
     }
     private void criarPermissoes() {
@@ -224,22 +222,21 @@ public class DataInitializer implements CommandLineRunner {
             }
         }
     }
-    private void criarFiliais(){
-        Set<String> existentes = new HashSet<>(filialRepository.findAll()
-                .stream()
-                .map(Filial::getNome)
-                .toList());
-        Set<RegistroFilialDTO> recorrencias = Set.of(
-                new RegistroFilialDTO("ARMAZÉM MATEUS S.A. CD 81 SÃO LUIS",81),
-                new RegistroFilialDTO("ARMAZÉM MATEUS S.A. CD 87 DAVINÓPOLIS",87),
-                new RegistroFilialDTO("ARMAZÉM MATEUS SA - ITAPERA KM12",116)
-                );
-        for(RegistroFilialDTO e:recorrencias){
-            if(!existentes.contains(e.nome())){
-                FilialGatewayRepository.registroFilial(e);
-            }
-        }
-    }
+//    private void criarFiliais(){
+//        Set<String> existentes = new HashSet<>(filialRepository.findAll()
+//                .stream()
+//                .map(Filial::getNome)
+//                .toList());
+//        Set<RegistroFilialDTO> recorrencias = Set.of(
+//                new RegistroFilialDTO("CD87-DAVINOPOLIS-MA",87),
+//                new RegistroFilialDTO("CD116-ITAPERA-MA",116)
+//                );
+//        for(RegistroFilialDTO e:recorrencias){
+//            if(!existentes.contains(e.nome())){
+//                FilialGatewayRepository.registroFilial(e);
+//            }
+//        }
+//    }
     private void CriarModulos(){
         Set<String> existentes = new HashSet<>(sistemaRepository.findAll()
                 .stream()
@@ -247,8 +244,10 @@ public class DataInitializer implements CommandLineRunner {
                 .toList());
         Set<SistemaAcessoDTO> re= Set.of(
                 new SistemaAcessoDTO("Portaria","Gerenciamento de permissões e módulos do usuário","/portaria",true, SistemaStatusEnun.PORTARIA_ACCESS.name()),
-                new SistemaAcessoDTO("Rcebimento","","/recebimento",true,SistemaStatusEnun.RECEBIMENTO_ACCESS.name()),
-                new SistemaAcessoDTO("Inventário","Consulta e resultado de inventário","/inventario",true,SistemaStatusEnun.INVENTARIO_ACCESS.name())
+                new SistemaAcessoDTO("Recebimento","","/recebimento",true,SistemaStatusEnun.RECEBIMENTO_ACCESS.name()),
+                new SistemaAcessoDTO("Inventário","Consulta e resultado de inventário","/inventario",true,SistemaStatusEnun.INVENTARIO_ACCESS.name()),
+        new SistemaAcessoDTO("Material Logistico","Controle de material Logistico","/logistico",true,SistemaStatusEnun.LOGISTICO_ACCESS.name())
+
         );
         for(SistemaAcessoDTO e:re){
             if(!existentes.contains(e.titulo())){

@@ -1,6 +1,6 @@
 package com.portariacd.modulos.Moduloportaria.domain.models;
 
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.recorrencia.RequestRecorrenciaDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.recorrencia.RequestRecorrenciaDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.VisitanteEntity;
 
 import java.time.LocalDateTime;

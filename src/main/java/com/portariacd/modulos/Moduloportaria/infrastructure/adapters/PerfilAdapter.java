@@ -1,7 +1,7 @@
 package com.portariacd.modulos.Moduloportaria.infrastructure.adapters;
 
 import com.portariacd.modulos.Moduloportaria.domain.gateways.PerfilGatewayRepository;
-import com.portariacd.modulos.Moduloportaria.domain.models.vo.perfilDTO.PerfilResponseDTO;
+import com.portariacd.modulos.Moduloportaria.domain.models.dto.perfilDTO.PerfilResponseDTO;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.PerfilRepository;
 import org.springframework.stereotype.Component;
 
