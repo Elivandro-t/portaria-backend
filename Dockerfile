@@ -12,7 +12,7 @@ COPY . .
 
 RUN mvn clean package
 
-FROM openjdk:17-slim
+FROM openjdk:17.0.8-slim-buster
 
 WORKDIR /portaria
 
