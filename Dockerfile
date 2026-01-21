@@ -1,4 +1,4 @@
-FROM ubuntu:latest as build
+FROM ubuntu:latest AS build
 
 RUN apt-get update && apt-get install -y \
     openjdk-17-jdk \
@@ -12,7 +12,7 @@ COPY . .
 
 RUN mvn clean package
 
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-slim
 
 WORKDIR /portaria
 
