@@ -5,7 +5,8 @@ public enum StatusPortaria {
     ENTRADA_LIBERADA("entrada liberada"),
     AGUARDANDO_SAIDA("aguardando saida"),
     SAIDA_LIBERADA("liberado"),
-    RECUSADO("recusado");
+    RECUSADO("recusado"),
+    FECHADO_AUTOMATICO("fechado");
     private String nome;
     StatusPortaria(String nome){
         this.nome = nome;

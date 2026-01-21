@@ -1,5 +1,6 @@
 package com.portariacd.modulos.Moduloportaria.services;
 
+import com.portariacd.modulos.Moduloportaria.domain.models.registro_visitante.StatusPortaria;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.RegistroVisitanteRepository;
 import com.portariacd.modulos.Moduloportaria.infrastructure.persistence.registroVisitante.RegistroVisitantePortariaEntity;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -28,7 +29,7 @@ public class TarefasServices {
         List<RegistroVisitantePortariaEntity> listaDeRegistro = new ArrayList<>();
 
         for(var registro:registroEncontrados){
-
+            boolean alterado = false;
             var visitante = registro.getVisitante();
             if(visitante==null){
                 continue;
@@ -36,6 +37,22 @@ public class TarefasServices {
             var recorrencia = visitante.getRecorrencia();
             if(recorrencia==null){
                 continue;
+            }
+            if(recorrencia.getNome().trim().equals("UNICO")){
+                LocalDate dataHoje = LocalDate.now();
+                LocalDate dataRegistro = registro.getDataCriacao().toLocalDate();
+                if (dataRegistro.isBefore(dataHoje)){
+                    registro.setAtivo(false);
+                    registro.setStatus(StatusPortaria.FECHADO_AUTOMATICO);
+//                    String msg = """
+//                            protocolo: %s
+//                            Fechado: %s
+//                            Data criacao: %s
+//                            Nome: %s
+//                            """.formatted(registro.getProtocolo(),LocalDateTime.now(),registro.getDataCriacao(),registro.getNomeCompleto());
+//                    System.out.println("Registro finalizado:\n"+msg);
+                     alterado = true;
+                }
             }
                 if(recorrencia.getNome().trim().equals("RECORRENTE TEMPORARIO")){
                     if(registro.getVisitante().getDataRestritoAcesso()!=null){
@@ -48,8 +65,9 @@ public class TarefasServices {
                         registro.getVisitante().setBloqueioAcesso(true);
                         registro.getVisitante().setDataRestritoAcesso(null);
                         registro.setAtivo(false);
-                        listaDeRegistro.add(registro);
-                }
+                        alterado = true;
+
+                    }
                     }
             }
             if (registro.getEntradaVisitante() == null) {
@@ -60,26 +78,26 @@ public class TarefasServices {
                 LocalDateTime entrada = registro.getEntradaVisitante().getDataEntrada();
                     var horas = Duration.between(entrada, horaAtual).toHours();
                     if (horas >= 10 && horas < 12) {
-                        registro.setPrioridadeAviso("ATENÇÃO: MOTORISTA COM SAÍDA PENDENTE");
-                        listaDeRegistro.add(registro);
-                        registro.setPrioridadeAtrasoAtivo(true);
+                        registro.setPrioridadeAviso("ATENÇÃO: MOTORISTA COM SAÍDA PENDENTE");registro.setPrioridadeAtrasoAtivo(true);
+                        alterado = true;
 
                     }
                     // ⛔ Passou de 12 horas → PRIORIDADE ATRASO + inativa
                     else if (horas >= 12) {
                         registro.setPrioridadeAtraso("ATENÇÃO: MOTORISTA COM ATRASO CRITICO DE SAIDA");
                         registro.setPrioridadeAtrasoAtivo(true);
-                        listaDeRegistro.add(registro);
+                        alterado = true;
                     }
-//                    else if (horas >= 24) {
-//                        registro.setPrioridadeAtraso("FECHADO POR FALTA DE LIBERAÇÃO");
-//                        registro.setAtivo(false);
-//                        registro.setPrioridadeAtrasoAtivo(true);
-//                        listaDeRegistro.add(registro);
-//                    }
+                    if(alterado){
+                        System.out.println("Registro adiconado");
+                    listaDeRegistro.add(registro);
+                }
 
             }
         }
-        repository.saveAll(listaDeRegistro);
+       if(!listaDeRegistro.isEmpty()){
+           System.out.println("salvou");
+           repository.saveAll(listaDeRegistro);
+       }
     }
 }

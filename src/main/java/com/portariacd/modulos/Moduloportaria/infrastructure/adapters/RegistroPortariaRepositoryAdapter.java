@@ -265,14 +265,11 @@ public class RegistroPortariaRepositoryAdapter implements RegistroPortariaGatewa
                     ()->new RuntimeException("Visitante não encontado")
             );
 
-        System.out.println("visitante r "+visitanteEntity.getRecorrencia().getNome());
         boolean isRecorrente = visitanteEntity.getRecorrencia()!=null & "RECORRENTE".equals(visitanteEntity.getRecorrencia().getNome());
         boolean isRecorrenteTemporario =  visitanteEntity.getRecorrencia()!=null&& "RECORRENTE TEMPORARIO".equals(visitanteEntity.getRecorrencia().getNome());
 
-        System.out.println("recorrente "+isRecorrente + " tenporario "+isRecorrenteTemporario);
         if(isRecorrente || isRecorrenteTemporario){
             if (Boolean.TRUE.equals(visitanteEntity.getBloqueioAcesso())){
-                System.out.println("caiu awui");
                     throw new RuntimeException(
                             "Acesso proibido: recorrência temporária expirada!"
                     );
