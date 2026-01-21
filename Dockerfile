@@ -9,13 +9,9 @@ COPY pom.xml .
 RUN mvn dependency:go-offline
 
 COPY . .
-
 RUN mvn clean package
-
 FROM openjdk:17.0.8-slim-buster
-
 WORKDIR /portaria
-
 COPY --from=build /portaria/target/portaria-0.0.1-SNAPSHOT.jar portaria.jar
 EXPOSE 8080
 ENV DATA_DIR=/var/lib/data
