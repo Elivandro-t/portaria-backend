@@ -36,5 +36,4 @@ build/
 target
 node_modules
 *.log
-Dockerfile
 README.md
